@@ -6,12 +6,13 @@ export type IEstablishmentProps = {
     establishmentName: string;
     establishmentDocument: string;
     email: string;
+    password: string;
     instagram?: string;
     logo?: string;
     primaryColor?: string;
     secondaryColor?: string;
     customers?: string[];
     products?: string[];
-    active: true;
+    active: boolean;
     address?: Address | null;
 }

@@ -15,6 +15,7 @@ describe('Establishment Entity', () => {
       establishmentName: 'John\'s Cafe',
       establishmentDocument: '12.345.678/0001-90',
       email: 'johnscafe@example.com',
+      password: "1245778",
       address: new Address({
           street: 'Main Street',
           number: 123,

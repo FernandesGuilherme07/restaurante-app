@@ -70,7 +70,7 @@ export default class Establishment extends Entity {
     if (!cnpjRegex.test(establishmentProps.establishmentDocument)) {
       throw new AppError("invalid Document!", 500);
     }
-    if (!cepRegex.test(establishmentProps.address?.addressProps.zipcode ?? "")) {
+    if (establishmentProps.address && !cepRegex.test(establishmentProps.address?.addressProps.zipcode)) {
       throw new AppError("invalid Cep!", 500);
     }
     if (!cpfRegex.test(establishmentProps.ownersDocument)) {
