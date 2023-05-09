@@ -3,7 +3,9 @@ import EstablishmenstRepository from "../../../../Domain/Contracts/Establishmens
 import Establishment from "../../../../Domain/Entities/Establishment/Establishment";
 import { IEstablishmentProps } from "../../../../Domain/Entities/Establishment/IEstablishmentProps";
 
-export default class establishmentsRepositoryInMemory implements EstablishmenstRepository {
+export default class establishmentsRepositoryInMemory
+  implements EstablishmenstRepository
+{
   private establishments: Establishment[];
 
   constructor() {
@@ -19,7 +21,9 @@ export default class establishmentsRepositoryInMemory implements EstablishmenstR
   }
 
   async GetById(id: string): Promise<Establishment> {
-    const establishment = this.establishments.find((establishment) => establishment.id === id);
+    const establishment = this.establishments.find(
+      (establishment) => establishment.id === id
+    );
     if (!establishment) {
       throw new AppError("Establishment not found", 401);
     }
@@ -27,15 +31,19 @@ export default class establishmentsRepositoryInMemory implements EstablishmenstR
   }
 
   async GetByEmail(email: string): Promise<Establishment | null> {
-    const establishment = this.establishments.find((establishment) => establishment.establishmentProps.email === email);
+    const establishment = this.establishments.find(
+      (establishment) => establishment.establishmentProps.email === email
+    );
     if (!establishment) {
-     return null
+      return null;
     }
     return establishment;
-}
+  }
 
   async UpDate(value: Establishment): Promise<void> {
-    const establishmentIndex = this.establishments.findIndex((establishment) => establishment.id === value.id);
+    const establishmentIndex = this.establishments.findIndex(
+      (establishment) => establishment.id === value.id
+    );
     if (establishmentIndex === -1) {
       throw new AppError("Establishment not found", 401);
     }
@@ -43,10 +51,14 @@ export default class establishmentsRepositoryInMemory implements EstablishmenstR
   }
 
   async ToggleStatus(id: string, status: boolean): Promise<void> {
-    const establishmentIndex = this.establishments.findIndex((establishment) => establishment.id === id);
+    const establishmentIndex = this.establishments.findIndex(
+      (establishment) => establishment.id === id
+    );
     if (establishmentIndex === -1) {
       throw new AppError("Establishment not found", 401);
     }
-    this.establishments[establishmentIndex].UpdatedEstablishmentProps({ active: status } as IEstablishmentProps);
+    this.establishments[establishmentIndex].UpdatedEstablishmentProps({
+      active: status,
+    } as IEstablishmentProps);
   }
 }

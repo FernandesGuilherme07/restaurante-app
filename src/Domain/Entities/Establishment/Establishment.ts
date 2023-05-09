@@ -1,4 +1,3 @@
-
 import Entity from "../Entity";
 import { AppError } from "../../../Aplication/Error/AppError";
 import { IEstablishmentProps } from "./IEstablishmentProps";
@@ -26,19 +25,19 @@ export default class Establishment extends Entity {
     return this._establishmentProps;
   }
 
-   UpdatedEstablishmentProps(establishmentProps: IEstablishmentProps) {
+  UpdatedEstablishmentProps(establishmentProps: IEstablishmentProps) {
     this.UpdatedAt();
     this._establishmentProps = {
-        ...establishmentProps,
-        instagram: establishmentProps.instagram || "",
-        logo: establishmentProps.logo || "",
-        address: establishmentProps.address || null,
-        primaryColor: establishmentProps.primaryColor || "",
-        secondaryColor: establishmentProps.primaryColor || "",
-        customers: establishmentProps.customers || [],
-        products: establishmentProps.products || [],
-        active: true,
-      };
+      ...establishmentProps,
+      instagram: establishmentProps.instagram || "",
+      logo: establishmentProps.logo || "",
+      address: establishmentProps.address || null,
+      primaryColor: establishmentProps.primaryColor || "",
+      secondaryColor: establishmentProps.primaryColor || "",
+      customers: establishmentProps.customers || [],
+      products: establishmentProps.products || [],
+      active: true,
+    };
   }
 
   get Customers() {
@@ -47,7 +46,9 @@ export default class Establishment extends Entity {
 
   AddCustomer(client: string) {
     this.UpdatedAt();
-    this.establishmentProps.customers ? this.establishmentProps.customers.push(client) : (this.establishmentProps.customers = [client]);
+    this.establishmentProps.customers
+      ? this.establishmentProps.customers.push(client)
+      : (this.establishmentProps.customers = [client]);
   }
 
   get Products() {
@@ -56,7 +57,9 @@ export default class Establishment extends Entity {
 
   AddProduct(product: string) {
     this.UpdatedAt();
-    this.establishmentProps.products ? this.establishmentProps.products.push(product) : (this.establishmentProps.products = [product]);
+    this.establishmentProps.products
+      ? this.establishmentProps.products.push(product)
+      : (this.establishmentProps.products = [product]);
   }
 
   private DataValid(establishmentProps: IEstablishmentProps) {
@@ -70,7 +73,10 @@ export default class Establishment extends Entity {
     if (!cnpjRegex.test(establishmentProps.establishmentDocument)) {
       throw new AppError("invalid Document!", 500);
     }
-    if (establishmentProps.address && !cepRegex.test(establishmentProps.address?.addressProps.zipcode)) {
+    if (
+      establishmentProps.address &&
+      !cepRegex.test(establishmentProps.address?.addressProps.zipcode)
+    ) {
       throw new AppError("invalid Cep!", 500);
     }
     if (!cpfRegex.test(establishmentProps.ownersDocument)) {

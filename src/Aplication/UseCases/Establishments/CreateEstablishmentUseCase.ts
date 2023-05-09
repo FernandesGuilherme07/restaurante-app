@@ -17,9 +17,11 @@ export default class CreateEstablishmentUseCase {
 
   async execute(request: IRequest): Promise<void> {
     const establishment = new Establishment(request);
-    const emailExists = await this.establishmentsRepository.GetByEmail(request.email)
-    if(emailExists) {
-      throw new AppError("Email existe!")
+    const emailExists = await this.establishmentsRepository.GetByEmail(
+      request.email
+    );
+    if (emailExists) {
+      throw new AppError("Email existe!");
     }
     await this.establishmentsRepository.Create(establishment);
   }
